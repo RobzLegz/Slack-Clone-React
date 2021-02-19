@@ -1,11 +1,10 @@
 import React from 'react';
-import Chat from './Chat';
-import Sidebar from './Sidebar';
+import Chat from './components/Chat';
+import Sidebar from './components/Sidebar';
 
 const Home = () => {
     return (
         <div>
-            <Sidebar />
             <Chat />
         </div>
     )
