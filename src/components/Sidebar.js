@@ -8,6 +8,7 @@ import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
 import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
 import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 import AddIcon from '@material-ui/icons/Add';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Sidebar = () => {
 
@@ -43,11 +44,11 @@ const Sidebar = () => {
             </SidebarHeadeer>
             <SidebarOption Icon={CommentRoundedIcon} title="option" />
             <SidebarOption Icon={AlternateEmailRoundedIcon} title="option" />
-            <SidebarOption Icon={MoreVertRoundedIcon} title="option"/>
+            <SidebarOption  Icon={MoreVertRoundedIcon} title="option"/>
             <hr/>
-            <SidebarOption title="option"/>
+            <SidebarOption Icon={ExpandMoreIcon} title="option"/>
             <hr/>
-            <SidebarOption icon={AddIcon} title="Add channel" onClick={addChannel} />
+            <SidebarOption Icon={AddIcon} title="Add channel" onClick={addChannel} />
             {rooms.map((room) => (
                 <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
             ))}

@@ -27,15 +27,17 @@ const SidebarOptionContainer = styled.div`
     padding-left:2px;
     height: 30px;
     cursor: pointer;
+    color: #bdbbbb;
     :hover{
         opacity:0.8;
         background-color:#311336
     }
     >h3{
-        font-weight: 500;
+        font-weight: 300;
     }
     >h3 > span{
         padding:15px;
+        font-weight: 1000;
     }
 `;
 const SidebarOptionChannel = styled.h3`
@@ -45,6 +47,7 @@ const SidebarOptionChannel = styled.h3`
     align-items:center;
     >h3{
         margin-left:5px;
+        font-weight: 400;
     }
 `;
 
