@@ -1,10 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Message from './Message';
+import {roomId, selectRoomId} from "../features/appSlice"
+import { useSelector } from 'react-redux';
+import db from '../firebase';
+import firebase from "firebase";
 
 const Chat = () => {
+
+    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState("");
+    const roomId = useSelector(selectRoomId);
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        db.collection("rooms").doc(roomId).collection("messages").add({
+            message: message,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            user: "Bigger Bob",
+            userImage: "https://lh3.googleusercontent.com/proxy/gphy2F8BbQv4o-LSEABTHLogP4w-HeOmQdFZrMQIr-oI-p-eqmJj4Bvr-bZ3L9wh9Y0HuXKSciN4iUdFoMbqi1fDOI9ojV8wJ_22enGh-tQ",
+        })
+        setMessage("");
+    }
+
+    useEffect(() => {
+        if(roomId){
+            db.collection("rooms").doc(roomId).collection("messages").orderBy("timestamp", "desc").onSnapshot((snapshot) => (
+                setMessages(snapshot.docs.map((doc) => doc.data()))
+            ));
+        }
+    }, []); 
+
     return (
         <StyledChat>
             <StyledChatHeader>
@@ -18,11 +46,20 @@ const Chat = () => {
                 </div>
             </StyledChatHeader>
             <StyledChatMessages>
-                <Message />
+                {messages?.map((send) => (
+                    <Message 
+                        message={send.message} 
+                        timestamp={send.timestamp} 
+                        user={send.user} 
+                        userImage={send.userImage} 
+                        key={send.id}
+                        id={send.id}
+                    />
+                ))}
             </StyledChatMessages>
             <form>
-                <StyledChatInput placeholder="message #dev-ops" type="text" />
-                <button type="submit">Submit</button>
+                <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder="message #dev-ops" type="text" />
+                <button onClick={sendMessage} type="submit">Submit</button>
             </form>
         </StyledChat>
     )
