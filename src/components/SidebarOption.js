@@ -1,21 +1,33 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { enterRoom } from '../features/appSlice';
 import db from "../firebase";
 
-const SidebarOption = ({title, Icon,id}) => {    
+const SidebarOption = ({title, Icon, id}) => {   
+
+    const dispatch = useDispatch();
+    
+    const selectChannel = () => {
+        if(id){
+            dispatch(
+                enterRoom({
+                    roomId: id,
+                })
+            );
+        }
+    };
+    
     return (
         <SidebarOptionContainer>
             {Icon && <Icon fontSize="small" style={{padding:"10px"}} />}
             {Icon ? (
-                <Link>
-                    <SidebarOptionChannel>
-                        <Icon fontSize="small" />
-                        <h3>{title}</h3>
-                    </SidebarOptionChannel>
-                </Link>
+                <SidebarOptionChannel onClick={selectChannel}>
+                    <Icon fontSize="small" />
+                    <h3>{title}</h3>
+                </SidebarOptionChannel>
             ) : (
-                <SidebarOptionChannel>
+                <SidebarOptionChannel onClick={selectChannel}>
                     <span>#</span>
                     <h4>{title}</h4>
                 </SidebarOptionChannel>
@@ -52,6 +64,7 @@ const SidebarOptionChannel = styled.h3`
     font-weight:300;
     display: flex;
     align-items:center;
+    width:100%;
     >h3{
         margin-left:5px;
         font-weight: 400;

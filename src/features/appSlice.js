@@ -6,20 +6,14 @@ export const appSlice = createSlice({
     roomId: null,
   },
   reducers: {
-    increment: state => {
-      state.value += 1;
-    },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    enterRoom: (state, action) => {
+      state.roomId = action.payload.roomId;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = appSlice.actions;
+export const { enterRoom } = appSlice.actions;
 
-export const selectCount = state => state.app.value;
+export const selectRoomId = (state) => state.app.roomId;
 
 export default appSlice.reducer;
