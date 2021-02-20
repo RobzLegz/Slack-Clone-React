@@ -9,15 +9,15 @@ const Header = () => {
     return (
         <StyledHeader>
             <StyledHeaderLeft>
-                <StyledAvatar src="" />
                 <AccessTimeIcon />
             </StyledHeaderLeft>
             <StyledHeaderMiddle>
                 <SearchIcon />
                 <input type="text" placeholder="search papafam"/>
             </StyledHeaderMiddle>
-            <StyledHeaderRight>
+            <StyledHeaderRight>                
                 <HelpOutlineIcon />
+                <StyledAvatar src="" />
             </StyledHeaderRight>
         </StyledHeader>
     )
@@ -32,6 +32,7 @@ const StyledHeader = styled.div`
     padding:10px 0;
     background-color: var(--slack-color);
     color:#fff;
+    height:60px;
 `;
 const StyledHeaderLeft = styled.div`
     flex:0.3;
@@ -63,15 +64,18 @@ const StyledHeaderMiddle = styled.div`
 `;
 const StyledHeaderRight = styled.div`
     flex: 0.3;
-    align-items:flex-end;
     display:flex;
+    align-items:center;
+    justify-content: space-between;
     > .MuiSvgIcon-root{
-        margin-left:auto;
-        margin-right:20px;
+        margin-left:20px;
+        font-size:30px;
     }
 `;
 const StyledAvatar = styled(Avatar)`
     cursor: pointer;
+    display:flex;
+    margin-right:20px;
     :hover{
         opacity:0.8;
     }

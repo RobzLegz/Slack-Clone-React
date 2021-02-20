@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CreateIcon from '@material-ui/icons/Create';
 import SidebarOption from './SidebarOption';
 import db from '../firebase';
@@ -37,8 +36,7 @@ const Sidebar = () => {
             <SidebarHeadeer>
                 <SidebarInfo>
                     <h2>PPA FAm</h2>
-                    <FiberManualRecordIcon />
-                    <p>Robert L</p>
+                    <ExpandMoreIcon />
                 </SidebarInfo>
                 <CreateIcon />
             </SidebarHeadeer>
@@ -47,12 +45,11 @@ const Sidebar = () => {
             <SidebarOption  Icon={MoreVertRoundedIcon} title="More"/>
             <hr/>
             <SidebarOption Icon={ExpandMoreIcon} title="Channels"/>
-            <hr/>
             <StyledAddChannel onClick={addChannel}>
                 <AddIcon />
                 Add Channel
             </StyledAddChannel>
-            {rooms.map((room) => (
+            {rooms?.map((room) => (
                 <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
             ))}
         </SidebarContainer>
@@ -84,6 +81,10 @@ const SidebarHeadeer = styled.div`
 `;
 const SidebarInfo = styled.div`
     flex:1;
+    display:flex;
+    align-items:center;
+    color: #e9e5e5;
+    height:20px;
     >h2{
         font-size: 15px;
         font-weight:900;

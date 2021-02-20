@@ -1,16 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import db from "../firebase";
 
-const SidebarOption = ({title, Icon}) => {    
+const SidebarOption = ({title, Icon,id}) => {    
     return (
         <SidebarOptionContainer>
             {Icon && <Icon fontSize="small" style={{padding:"10px"}} />}
             {Icon ? (
-                <SidebarOptionChannel>
-                    <Icon fontSize="small" />
-                    <h3>{title}</h3>
-                </SidebarOptionChannel>
+                <Link>
+                    <SidebarOptionChannel>
+                        <Icon fontSize="small" />
+                        <h3>{title}</h3>
+                    </SidebarOptionChannel>
+                </Link>
             ) : (
                 <SidebarOptionChannel>
                     <span>#</span>
@@ -31,6 +34,10 @@ const SidebarOptionContainer = styled.div`
     :hover{
         opacity:0.8;
         background-color:#311336
+    }
+    >a{
+        color: #bdbbbb;
+        text-decoration:none;
     }
     >h3{
         font-weight: 300;

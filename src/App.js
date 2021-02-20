@@ -15,7 +15,7 @@ function App() {
           <AppBody>
             <Sidebar />
             <Switch>
-              <Route path="/" exact>              
+              <Route path="/">              
                 <Chat />
               </Route>
             </Switch>
