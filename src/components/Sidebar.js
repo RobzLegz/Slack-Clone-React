@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CreateIcon from '@material-ui/icons/Create';
 import SidebarOption from './SidebarOption';
 import db from '../firebase';
-//import {useCollection} from "react-firebase-hooks";
+import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
+import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
+import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
+import AddIcon from '@material-ui/icons/Add';
 
 const Sidebar = () => {
 
-    //const [channels, loading, error] = useCollection(db.collection("rooms"));
+    const [rooms, setRooms] = useState([]);
+
+    const addChannel = () => {
+        const channelName = prompt("Please enter the channel name");
+        if(channelName){
+            db.collection("rooms").add({
+                name: channelName,
+            });
+        }
+    };
+
+    useEffect(() => {
+        db.collection("rooms").onSnapshot((snapshot) => (
+            setRooms(snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+            })))
+        ));
+    }, []);
 
     return (
         <SidebarContainer>
@@ -20,19 +41,16 @@ const Sidebar = () => {
                 </SidebarInfo>
                 <CreateIcon />
             </SidebarHeadeer>
-            <SidebarOption title="option" />
-            <SidebarOption title="option" />
-            <SidebarOption title="option"/>
-            <SidebarOption title="option"/>
-            <SidebarOption title="option"/>
-            <SidebarOption title="option"/>
+            <SidebarOption Icon={CommentRoundedIcon} title="option" />
+            <SidebarOption Icon={AlternateEmailRoundedIcon} title="option" />
+            <SidebarOption Icon={MoreVertRoundedIcon} title="option"/>
             <hr/>
             <SidebarOption title="option"/>
             <hr/>
-            <SidebarOption title="Add channel" addChannelOption/>
-            {/* {channels?.docs.map((doc) => (
-                <SidebarOption title={doc.data().name}/>
-            ))} */}
+            <SidebarOption icon={AddIcon} title="Add channel" onClick={addChannel} />
+            {rooms.map((room) => (
+                <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
+            ))}
         </SidebarContainer>
     )
 }
