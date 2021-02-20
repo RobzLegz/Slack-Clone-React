@@ -42,13 +42,16 @@ const Sidebar = () => {
                 </SidebarInfo>
                 <CreateIcon />
             </SidebarHeadeer>
-            <SidebarOption Icon={CommentRoundedIcon} title="option" />
-            <SidebarOption Icon={AlternateEmailRoundedIcon} title="option" />
-            <SidebarOption  Icon={MoreVertRoundedIcon} title="option"/>
+            <SidebarOption Icon={CommentRoundedIcon} title="Threads" />
+            <SidebarOption Icon={AlternateEmailRoundedIcon} title="Mentions & reactions" />
+            <SidebarOption  Icon={MoreVertRoundedIcon} title="More"/>
             <hr/>
-            <SidebarOption Icon={ExpandMoreIcon} title="option"/>
+            <SidebarOption Icon={ExpandMoreIcon} title="Channels"/>
             <hr/>
-            <SidebarOption Icon={AddIcon} title="Add channel" onClick={addChannel} />
+            <StyledAddChannel onClick={addChannel}>
+                <AddIcon />
+                Add Channel
+            </StyledAddChannel>
             {rooms.map((room) => (
                 <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
             ))}
@@ -98,6 +101,19 @@ const SidebarInfo = styled.div`
         margin-top:1px;
         margin-right:2px;
         color:green;
+    }
+`;
+const StyledAddChannel = styled.div`
+    display:flex;
+    align-items:center;
+    color: #bdbbbb;
+    padding-left:10px;
+    cursor: pointer;
+    height: 30px;
+    font-weight: 500;
+    :hover{
+        opacity:0.8;
+        background-color:#311336
     }
 `;
 
