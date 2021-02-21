@@ -1,4 +1,3 @@
-import { Avatar } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components';
 import * as timeago from 'timeago.js';
@@ -6,7 +5,7 @@ import * as timeago from 'timeago.js';
 const Message = ({message,timestamp,user,userImage}) => {
     return (
         <StyledMessage>
-            <Avatar src={userImage} />
+            <StyledUserImage src={userImage} />
             <StyledMessageContainer>
                 <h3>{user}</h3>
                 <p>{message}</p>
@@ -47,6 +46,12 @@ const StyledTimestampContainer = styled.div`
     border:1px solid lightgrey;
     align-items:center;
     border-radius: 30px;
+`;
+const StyledUserImage = styled.img`
+    height:50px;
+    border-radius:8px;
+    width: 50px;
+    object-fit:cover;
 `;
 
 export default Message

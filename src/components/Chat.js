@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -14,6 +14,7 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const roomId = useSelector(selectRoomId);
     const [roomInfo, setRoomInfo] = useState("");
+    const lastMessage = useRef(null);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -24,6 +25,9 @@ const Chat = () => {
             userImage: "https://lh3.googleusercontent.com/proxy/gphy2F8BbQv4o-LSEABTHLogP4w-HeOmQdFZrMQIr-oI-p-eqmJj4Bvr-bZ3L9wh9Y0HuXKSciN4iUdFoMbqi1fDOI9ojV8wJ_22enGh-tQ",
         })
         setMessage("");
+        lastMessage?.current?.scrollIntoView({
+            behavior: "smooth",
+        });
     }
 
     useEffect(() => {
@@ -35,37 +39,51 @@ const Chat = () => {
                 setRoomInfo(snapshot.data().name);
             });
         }
+        setTimeout(() => {
+            lastMessage?.current?.scrollIntoView({
+                behavior: "smooth",
+            });
+        }, 1000);
     }, [roomId]); 
 
     return (
-        <StyledChat>
-            <StyledChatHeader>
-                <div className="channel-name">
-                    <h4>#{roomInfo}</h4>
-                    <small>Add a topic</small>
-                </div>
-                <div className="chatHeader-right">
-                    <PersonAddOutlinedIcon />
-                    <InfoOutlinedIcon />
-                </div>
-            </StyledChatHeader>
-            <StyledChatMessages>
-                {messages.map((send) => (
-                    <Message 
-                        message={send.message} 
-                        timestamp={send.timestamp} 
-                        user={send.user} 
-                        userImage={send.userImage} 
-                        key={send.id}
-                        id={send.id}
-                    />
-                ))}
-            </StyledChatMessages>
-            <form>
-                <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
-                <button onClick={sendMessage} type="submit">Submit</button>
-            </form>
-        </StyledChat>
+        roomId ? (
+            <StyledChat>
+                <StyledChatHeader>
+                    <div className="channel-name">
+                        <h4>#{roomInfo}</h4>
+                        <small>Add a topic</small>
+                    </div>
+                    <div className="chatHeader-right">
+                        <PersonAddOutlinedIcon />
+                        <InfoOutlinedIcon />
+                    </div>
+                </StyledChatHeader>
+                <StyledChatMessages>
+                    {messages.map((send) => (
+                        <Message 
+                            message={send.message} 
+                            timestamp={send.timestamp} 
+                            user={send.user} 
+                            userImage={send.userImage} 
+                            key={send.id}
+                            id={send.id}
+                        />
+                    ))}
+                    <ChatBottom ref={lastMessage}>
+
+                    </ChatBottom>
+                </StyledChatMessages>
+                <form>
+                    <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
+                    <button onClick={sendMessage} type="submit">Submit</button>
+                </form>
+            </StyledChat>
+        ) : (
+            <StyledNothing>
+                <p>Select a achannel you want to go to</p>
+            </StyledNothing>
+        )
     )
 }
 const StyledChat = styled.div`
@@ -106,6 +124,7 @@ const StyledChatHeader = styled.div`
 const StyledChatMessages = styled.div`
     height: calc(100vh - 200px);
     width:100%;
+    overflow-y:scroll;
 `;
 const StyledChatInput = styled.input`
     width:90%;
@@ -114,6 +133,18 @@ const StyledChatInput = styled.input`
     padding:0 20px;
     outline:none;
     border-radius:10px;
+    background-color:#fff;
+`;
+const ChatBottom = styled.div`
+    padding-bottom: 200px;
+`;
+const StyledNothing = styled.div`
+    display:grid;
+    place-items:center;
+    width: 100%;
+    >p{
+        font-size: 24px;
+    }
 `;
 
 export default Chat
