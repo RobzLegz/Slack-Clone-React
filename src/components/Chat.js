@@ -141,7 +141,7 @@ const ChatBottom = styled.div`
 const StyledNothing = styled.div`
     display:grid;
     place-items:center;
-    width: 100%;
+    flex: 1;
     >p{
         font-size: 24px;
     }

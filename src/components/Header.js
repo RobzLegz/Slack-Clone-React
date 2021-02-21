@@ -4,8 +4,13 @@ import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 
 const Header = () => {
+
+    const user = useSelector(selectUser);
+
     return (
         <StyledHeader>
             <StyledHeaderLeft>
@@ -17,7 +22,7 @@ const Header = () => {
             </StyledHeaderMiddle>
             <StyledHeaderRight>                
                 <HelpOutlineIcon />
-                <StyledAvatar src="" />
+                <StyledAvatar src={user.photo} />
             </StyledHeaderRight>
         </StyledHeader>
     )

@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { enterRoom } from '../features/appSlice';
-import db from "../firebase";
 
 const SidebarOption = ({title, Icon, id}) => {   
 
@@ -22,7 +21,7 @@ const SidebarOption = ({title, Icon, id}) => {
         <SidebarOptionContainer>
             {Icon && <Icon fontSize="small" style={{padding:"10px"}} />}
             {Icon ? (
-                <SidebarOptionChannel onClick={selectChannel}>
+                <SidebarOptionChannel>
                     <Icon fontSize="small" />
                     <h3>{title}</h3>
                 </SidebarOptionChannel>
@@ -40,7 +39,6 @@ const SidebarOptionContainer = styled.div`
     font-size:12px;
     align-items:center;
     padding-left:2px;
-    height: 40px;
     cursor: pointer;
     color: #bdbbbb;
     :hover{
