@@ -8,10 +8,13 @@ import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded'
 import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 import AddIcon from '@material-ui/icons/Add';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 
 const Sidebar = () => {
 
     const [rooms, setRooms] = useState([]);
+    const user = useSelector(selectUser);
 
     const addChannel = () => {
         const channelName = prompt("Please enter the channel name");
@@ -49,13 +52,23 @@ const Sidebar = () => {
                 Channels
             </StyledAddChannel>
             <hr/>
-            <StyledAddChannel onClick={addChannel}>
+            <StyledAddChannel style={{cursor: "pointer"}} onClick={addChannel}>
                 <AddIcon />
                 Add Channel
             </StyledAddChannel>
             {rooms?.map((room) => (
                 <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
             ))}
+            <hr/>
+            <StyledAddChannel>
+                <ExpandMoreIcon />
+                Direct Messages
+            </StyledAddChannel>
+            <hr/>
+            <StyledAddChannel>
+                <img src={user.photo} alt={user?.displayName}/>
+                <p>{user.displayName}</p>
+            </StyledAddChannel>
         </SidebarContainer>
     )
 }
@@ -113,9 +126,13 @@ const StyledAddChannel = styled.div`
     align-items:center;
     color: #bdbbbb;
     padding-left:10px;
-    cursor: pointer;
     height: 30px;
     font-weight: 500;
+    >img{
+        width:30px;
+        margin: 0 20px;
+        border-radius: 5px;
+    }
 `;
 
 export default Sidebar

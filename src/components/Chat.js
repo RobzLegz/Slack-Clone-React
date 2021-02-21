@@ -7,6 +7,7 @@ import {roomId, selectRoomId} from "../features/appSlice"
 import { useSelector } from 'react-redux';
 import db from '../firebase';
 import firebase from "firebase";
+import { selectUser } from '../features/userSlice';
 
 const Chat = () => {
 
@@ -15,14 +16,15 @@ const Chat = () => {
     const roomId = useSelector(selectRoomId);
     const [roomInfo, setRoomInfo] = useState("");
     const lastMessage = useRef(null);
+    const user = useSelector(selectUser);
 
     const sendMessage = (e) => {
         e.preventDefault();
         db.collection("rooms").doc(roomId).collection("messages").add({
             message: message,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            user: "Bigger Bob",
-            userImage: "https://lh3.googleusercontent.com/proxy/gphy2F8BbQv4o-LSEABTHLogP4w-HeOmQdFZrMQIr-oI-p-eqmJj4Bvr-bZ3L9wh9Y0HuXKSciN4iUdFoMbqi1fDOI9ojV8wJ_22enGh-tQ",
+            user: user.displayName,
+            userImage: user.photo,
         })
         setMessage("");
         lastMessage?.current?.scrollIntoView({
