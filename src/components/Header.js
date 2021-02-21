@@ -6,6 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
+import { auth } from '../firebase';
 
 const Header = () => {
 
@@ -22,7 +23,7 @@ const Header = () => {
             </StyledHeaderMiddle>
             <StyledHeaderRight>                
                 <HelpOutlineIcon />
-                <StyledAvatar src={user.photo} />
+                <StyledAvatar onClick={() => auth.signOut()} src={user.photo} />
             </StyledHeaderRight>
         </StyledHeader>
     )
