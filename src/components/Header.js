@@ -1,4 +1,3 @@
-import { Avatar } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -78,10 +77,12 @@ const StyledHeaderRight = styled.div`
         font-size:30px;
     }
 `;
-const StyledAvatar = styled(Avatar)`
+const StyledAvatar = styled.img`
     cursor: pointer;
     display:flex;
     margin-right:20px;
+    height: 45px;
+    border-radius: 3px;
     :hover{
         opacity:0.8;
     }
