@@ -13,6 +13,7 @@ const Chat = () => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const roomId = useSelector(selectRoomId);
+    const [roomInfo, setRoomInfo] = useState("");
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -30,14 +31,17 @@ const Chat = () => {
             db.collection("rooms").doc(roomId).collection("messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => (
                 setMessages(snapshot.docs.map((doc) => doc.data()))
             ));
+            db.collection("rooms").doc(roomId).onSnapshot((snapshot) => {
+                setRoomInfo(snapshot.data().name);
+            });
         }
-    }, []); 
+    }, [roomId]); 
 
     return (
         <StyledChat>
             <StyledChatHeader>
                 <div className="channel-name">
-                    <h4>#dev-ops-101</h4>
+                    <h4>#{roomInfo}</h4>
                     <small>Add a topic</small>
                 </div>
                 <div className="chatHeader-right">
@@ -58,7 +62,7 @@ const Chat = () => {
                 ))}
             </StyledChatMessages>
             <form>
-                <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder="message #dev-ops" type="text" />
+                <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
                 <button onClick={sendMessage} type="submit">Submit</button>
             </form>
         </StyledChat>

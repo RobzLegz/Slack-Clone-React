@@ -44,7 +44,11 @@ const Sidebar = () => {
             <SidebarOption Icon={AlternateEmailRoundedIcon} title="Mentions & reactions" />
             <SidebarOption  Icon={MoreVertRoundedIcon} title="More"/>
             <hr/>
-            <SidebarOption Icon={ExpandMoreIcon} title="Channels"/>
+            <StyledAddChannel>
+                <ExpandMoreIcon />
+                Channels
+            </StyledAddChannel>
+            <hr/>
             <StyledAddChannel onClick={addChannel}>
                 <AddIcon />
                 Add Channel
@@ -112,10 +116,6 @@ const StyledAddChannel = styled.div`
     cursor: pointer;
     height: 30px;
     font-weight: 500;
-    :hover{
-        opacity:0.8;
-        background-color:#311336
-    }
 `;
 
 export default Sidebar

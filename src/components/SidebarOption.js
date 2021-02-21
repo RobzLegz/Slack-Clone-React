@@ -40,7 +40,7 @@ const SidebarOptionContainer = styled.div`
     font-size:12px;
     align-items:center;
     padding-left:2px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     color: #bdbbbb;
     :hover{
