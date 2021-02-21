@@ -36,7 +36,7 @@ const StyledMessageContainer = styled.div`
 `;
 const StyledTimestampContainer = styled.div`
     margin:0 50%;
-    width:200px;
+    min-width:200px;
     position:absolute;
     height: 30px;
     background-color:#fff;
