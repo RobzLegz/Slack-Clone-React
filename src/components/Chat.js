@@ -11,7 +11,7 @@ import firebase from "firebase";
 const Chat = () => {
 
     const [message, setMessage] = useState("");
-    const [messages, setMessages] = useState("");
+    const [messages, setMessages] = useState([]);
     const roomId = useSelector(selectRoomId);
 
     const sendMessage = (e) => {
@@ -27,7 +27,7 @@ const Chat = () => {
 
     useEffect(() => {
         if(roomId){
-            db.collection("rooms").doc(roomId).collection("messages").orderBy("timestamp", "desc").onSnapshot((snapshot) => (
+            db.collection("rooms").doc(roomId).collection("messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => (
                 setMessages(snapshot.docs.map((doc) => doc.data()))
             ));
         }
@@ -46,7 +46,7 @@ const Chat = () => {
                 </div>
             </StyledChatHeader>
             <StyledChatMessages>
-                {messages?.map((send) => (
+                {messages.map((send) => (
                     <Message 
                         message={send.message} 
                         timestamp={send.timestamp} 
