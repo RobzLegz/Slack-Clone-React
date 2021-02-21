@@ -38,7 +38,7 @@ const Sidebar = () => {
         <SidebarContainer>
             <SidebarHeadeer>
                 <SidebarInfo>
-                    <h2>PPA FAm</h2>
+                    <h2>Web Dev Group</h2>
                     <ExpandMoreIcon />
                 </SidebarInfo>
                 <CreateIcon />
@@ -52,7 +52,7 @@ const Sidebar = () => {
                 Channels
             </StyledAddChannel>
             <hr/>
-            <StyledAddChannel style={{cursor: "pointer"}} onClick={addChannel}>
+            <StyledAddChannel style={{cursor: "pointer", height: "40px", border: "1px solid #6e6e6e", borderLeft: "none", borderRight: "none"}} onClick={addChannel}>
                 <AddIcon />
                 Add Channel
             </StyledAddChannel>
@@ -65,7 +65,7 @@ const Sidebar = () => {
                 Direct Messages
             </StyledAddChannel>
             <hr/>
-            <StyledAddChannel>
+            <StyledAddChannel style={{marginTop: "20px"}}>
                 <img src={user.photo} alt={user?.displayName}/>
                 <p>{user.displayName}</p>
             </StyledAddChannel>
@@ -126,7 +126,7 @@ const StyledAddChannel = styled.div`
     align-items:center;
     color: #bdbbbb;
     padding-left:10px;
-    height: 30px;
+    height: 20px;
     font-weight: 500;
     >img{
         width:30px;

@@ -18,7 +18,7 @@ const Header = () => {
             </StyledHeaderLeft>
             <StyledHeaderMiddle>
                 <SearchIcon />
-                <input type="text" placeholder="search papafam"/>
+                <input type="text" placeholder="search Web Dev Group"/>
             </StyledHeaderMiddle>
             <StyledHeaderRight>                
                 <HelpOutlineIcon />
