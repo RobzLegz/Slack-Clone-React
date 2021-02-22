@@ -4,12 +4,16 @@ import CreateIcon from '@material-ui/icons/Create';
 import SidebarOption from './SidebarOption';
 import db from '../firebase';
 import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
-import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
-import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 import AddIcon from '@material-ui/icons/Add';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import GroupIcon from '@material-ui/icons/Group';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import AppsIcon from '@material-ui/icons/Apps';
+import AirplayIcon from '@material-ui/icons/Airplay';
 
 const Sidebar = () => {
 
@@ -44,8 +48,12 @@ const Sidebar = () => {
                 <CreateIcon />
             </SidebarHeadeer>
             <SidebarOption Icon={CommentRoundedIcon} title="Threads" />
-            <SidebarOption Icon={AlternateEmailRoundedIcon} title="Mentions & reactions" />
-            <SidebarOption  Icon={MoreVertRoundedIcon} title="More"/>
+            <SidebarOption Icon={AirplayIcon} title="Mentions & reactions" />
+            <SidebarOption Icon={DraftsIcon} title="Saved items" />
+            <SidebarOption Icon={BookmarkIcon} title="Channel browser" />
+            <SidebarOption  Icon={GroupIcon} title="People & user groups"/>
+            <SidebarOption  Icon={AppsIcon} title="Apps"/>
+            <SidebarOption Icon={FileCopyIcon} title="File browser" />
             <hr/>
             <StyledAddChannel>
                 <ExpandMoreIcon />
@@ -56,9 +64,11 @@ const Sidebar = () => {
                 <AddIcon />
                 Add Channel
             </StyledAddChannel>
-            {rooms?.map((room) => (
-                <SidebarOption key={room.id} id={room.id} title={room.data.name}/>
-            ))}
+            <StyledRooms>
+                {rooms?.map((room) => (
+                    <SidebarOption key={room?.id} id={room?.id} title={room?.data?.name}/>
+                ))}
+            </StyledRooms>
             <hr/>
             <StyledAddChannel>
                 <ExpandMoreIcon />
@@ -83,6 +93,15 @@ const SidebarContainer = styled.div`
     >hr{
         margin: 10px;
         border: 1px solid #49274b;
+    }
+`;
+const StyledRooms = styled.div`
+    overflow-y: scroll;
+    height: 40vh;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;
 const SidebarHeadeer = styled.div`

@@ -14,6 +14,7 @@ const Login = () => {
 
     return (
         <StyledLoginPage>
+            <img src="https://images.unsplash.com/photo-1476725994324-6f6833ea0631?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" alt=""/>
             <StyledLoginContainer>
                 <img src="https://foundercontent.com/static/media/slack_icon.55ad9eab.png" alt=""/>
                 <h2>Sign in</h2>
@@ -28,6 +29,13 @@ const StyledLoginPage = styled.div`
     place-items:center;
     height:100vh;
     background-color: #f8f8f8;
+    width: 100%;
+    >img{
+        width:100%;
+        position: absolute;
+        height:100vh;
+        object-fit:cover;
+    }
 `;
 const StyledLoginContainer = styled.div`
     background-color: #fffdfd;
@@ -38,7 +46,13 @@ const StyledLoginContainer = styled.div`
     padding:50px 30px;
     flex-direction:column;
     align-items:center;
+    background: rgba( 255, 255, 255, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
     border-radius: 30px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
     >img{
         height: 100px;
     }

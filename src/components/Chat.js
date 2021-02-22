@@ -72,9 +72,7 @@ const Chat = () => {
                             id={send.id}
                         />
                     ))}
-                    <ChatBottom ref={lastMessage}>
-
-                    </ChatBottom>
+                    <ChatBottom ref={lastMessage}></ChatBottom>
                 </StyledChatMessages>
                 <form>
                     <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
@@ -127,6 +125,11 @@ const StyledChatMessages = styled.div`
     height: calc(100vh - 200px);
     width:100%;
     overflow-y:scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `;
 const StyledChatInput = styled.input`
     width:90%;
