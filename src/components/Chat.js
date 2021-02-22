@@ -12,13 +12,28 @@ import MicIcon from '@material-ui/icons/Mic';
 import { Button } from '@material-ui/core';
 
 const Chat = () => {
-
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const roomId = useSelector(selectRoomId);
     const [roomInfo, setRoomInfo] = useState("");
     const lastMessage = useRef(null);
     const user = useSelector(selectUser);
+
+    recognition.onresult = function(event){
+        const iSaidText = event.results[0][0].transcript;
+        readOutLoud(iSaidText);
+    };
+
+    const speakingFunction = () => {
+        recognition.start();
+    }
+
+    const readOutLoud = (recordedMessage) => {
+        const speech = new SpeechSynthesisUtterance();
+        setMessage(recordedMessage);
+    }
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -79,7 +94,7 @@ const Chat = () => {
                 <form>
                     <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
                     <button onClick={sendMessage} type="submit">Submit</button>
-                    <Button style={{display:"flex", width:"30px",height:"50px", borderRadius:"30px"}}><MicIcon style={{fontSize:"30px", cursor: "pointer"}} /></Button>
+                    <Button onClick={speakingFunction} style={{display:"flex", width:"30px",height:"50px", borderRadius:"30px"}}><MicIcon style={{fontSize:"30px", cursor: "pointer"}} /></Button>
                 </form>
             </StyledChat>
         ) : (
