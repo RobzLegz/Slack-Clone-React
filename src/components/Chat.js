@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import db from '../firebase';
 import firebase from "firebase";
 import { selectUser } from '../features/userSlice';
+import MicIcon from '@material-ui/icons/Mic';
+import { Button } from '@material-ui/core';
 
 const Chat = () => {
 
@@ -77,6 +79,7 @@ const Chat = () => {
                 <form>
                     <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
                     <button onClick={sendMessage} type="submit">Submit</button>
+                    <Button style={{display:"flex", width:"30px",height:"50px", borderRadius:"30px"}}><MicIcon style={{fontSize:"30px", cursor: "pointer"}} /></Button>
                 </form>
             </StyledChat>
         ) : (
@@ -139,6 +142,7 @@ const StyledChatInput = styled.input`
     outline:none;
     border-radius:10px;
     background-color:#fff;
+    border: 1px solid #000;
 `;
 const ChatBottom = styled.div`
     padding-bottom: 200px;
