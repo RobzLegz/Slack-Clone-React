@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import * as timeago from 'timeago.js';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Message = ({message,timestamp,user,userImage}) => {
     return (
@@ -11,6 +12,7 @@ const Message = ({message,timestamp,user,userImage}) => {
                 <p>{message}</p>
                 <StyledTimestampContainer>
                     <p>{timeago.format(new Date(timestamp?.toDate()).toLocaleString())}</p>
+                    <ExpandMoreIcon />
                 </StyledTimestampContainer>
             </StyledMessageContainer>
         </StyledMessage>
