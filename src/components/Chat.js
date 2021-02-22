@@ -5,7 +5,7 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Message from './Message';
 import {roomId, selectRoomId} from "../features/appSlice"
 import { useSelector } from 'react-redux';
-import db from '../firebase';
+import db, { auth } from '../firebase';
 import firebase from "firebase";
 import { selectUser } from '../features/userSlice';
 import MicIcon from '@material-ui/icons/Mic';
@@ -34,6 +34,8 @@ const Chat = () => {
         setMessage(recordedMessage);
         if(recordedMessage.includes("clear")){
             setMessage("");
+        }else if(recordedMessage.includes("sign out")){
+            auth.signOut();
         }
     }
 
