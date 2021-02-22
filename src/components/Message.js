@@ -49,7 +49,7 @@ const StyledTimestampContainer = styled.div`
     padding: 0 20px;
     align-items:center;
     border-radius: 30px;
-
+    font-size: 14px;
 `;
 const StyledUserImage = styled.img`
     height:50px;
