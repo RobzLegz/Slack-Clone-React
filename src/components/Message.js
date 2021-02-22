@@ -25,7 +25,7 @@ const StyledMessage = styled.div`
     height:fit-content;
     color:#000;
     :hover{
-        background-color:#eeeaea;
+        background-color: #eeeaea;
     }
     border-bottom:1px solid lightgrey;
 `;
@@ -44,10 +44,12 @@ const StyledTimestampContainer = styled.div`
     z-index:30;
     top:110%;
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     border:1px solid lightgrey;
+    padding: 0 20px;
     align-items:center;
     border-radius: 30px;
+
 `;
 const StyledUserImage = styled.img`
     height:50px;
