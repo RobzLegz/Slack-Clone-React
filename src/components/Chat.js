@@ -41,13 +41,17 @@ const Chat = () => {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        db.collection("rooms").doc(roomId).collection("messages").add({
-            message: message,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            user: user.displayName,
-            userImage: user.photo,
-        })
-        setMessage("");
+        if(message !== ""){
+            db.collection("rooms").doc(roomId).collection("messages").add({
+                message: message,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                user: user.displayName,
+                userImage: user.photo,
+            })
+            setMessage("");
+        }else{
+            return;
+        }
         lastMessage?.current?.scrollIntoView({
             behavior: "smooth",
         });
