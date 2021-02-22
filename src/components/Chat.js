@@ -23,16 +23,18 @@ const Chat = () => {
 
     recognition.onresult = function(event){
         const iSaidText = event.results[0][0].transcript;
-        readOutLoud(iSaidText);
+        textSetMic(iSaidText);
     };
 
     const speakingFunction = () => {
         recognition.start();
     }
 
-    const readOutLoud = (recordedMessage) => {
-        const speech = new SpeechSynthesisUtterance();
+    const textSetMic = (recordedMessage) => {
         setMessage(recordedMessage);
+        if(recordedMessage.includes("clear")){
+            setMessage("");
+        }
     }
 
     const sendMessage = (e) => {

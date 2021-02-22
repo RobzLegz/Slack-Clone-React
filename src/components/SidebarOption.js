@@ -27,7 +27,7 @@ const SidebarOption = ({title, Icon, id}) => {
                 </SidebarOptionChannel>
             ) : (
                 <SidebarOptionChannel onClick={selectChannel}>
-                    <span>#</span>
+                    <span><strong style={{fontSize: "20px"}}>#</strong></span>
                     <h4>{title}</h4>
                 </SidebarOptionChannel>
             )}
@@ -58,11 +58,12 @@ const SidebarOptionContainer = styled.div`
     }
 `;
 const SidebarOptionChannel = styled.h3`
-    padding: 10px;
+    padding: 7px 10px;
     font-weight:300;
     display: flex;
     align-items:center;
     width:100%;
+    height: 40px;
     >h3{
         margin-left:5px;
         font-weight: 400;
