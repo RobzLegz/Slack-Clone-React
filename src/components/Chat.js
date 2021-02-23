@@ -46,7 +46,7 @@ const Chat = () => {
                 message: message,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 user: user.displayName,
-                userImage: user.photo,
+                userImage: user.photo, 
             })
             setMessage("");
         }else{
