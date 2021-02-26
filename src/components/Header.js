@@ -38,6 +38,7 @@ const StyledHeader = styled.div`
     background-color: var(--slack-color);
     color:#fff;
     height:60px;
+    z-index:100;
 `;
 const StyledHeaderLeft = styled.div`
     flex:0.3;
