@@ -10,6 +10,7 @@ import firebase from "firebase";
 import { selectUser } from '../features/userSlice';
 import MicIcon from '@material-ui/icons/Mic';
 import { Button } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 
 const Chat = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -101,31 +102,52 @@ const Chat = () => {
                 </StyledChatMessages>
                 <form>
                     <StyledChatInput value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`message #${roomInfo}`} type="text" />
-                    <button onClick={sendMessage} type="submit">Submit</button>
-                    <Button onClick={speakingFunction} style={{display:"flex", width:"30px",height:"50px", borderRadius:"30px"}}><MicIcon style={{fontSize:"30px", cursor: "pointer"}} /></Button>
+                    <button className="send-button" onClick={sendMessage} type="submit"><SendIcon /></button>
+                    <Button className="mic-button" onClick={speakingFunction} style={{display:"flex", width:"30px",height:"50px", borderRadius:"30px"}}><MicIcon style={{fontSize:"30px", cursor: "pointer"}} /></Button>
                 </form>
             </StyledChat>
         ) : (
             <StyledNothing>
-                <p>Select a achannel you want to go to</p>
+                <p>Select a channel you want to go to</p>
             </StyledNothing>
         )
     )
 }
 const StyledChat = styled.div`
+    position: relative;
     flex:1;
     height: calc(100vh - 60px);
     margin-top: 60px;
     background-color:#fff;
+    background-color: #363636;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     >form{
-        width:100%;
         align-items:center;
         display:flex;
-        justify-content:center;
+        justify-content:space-between;
         height:fit-content;
+        position: fixed;
+        width: 80%;
+        bottom: 20px;
+        background-color:#fff;
     }
-    >form>button{
-        display:none;
+    .send-button{
+        background-color:green;
+        color:#fff;
+        display: flex;
+        height:40px;
+        width:40px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        outline:none;
+        border:none;
+        cursor: pointer;
+    }
+    .mic-button{
+        color:#000;
     }
 `;
 const StyledChatHeader = styled.div`
@@ -135,8 +157,13 @@ const StyledChatHeader = styled.div`
     width:100%;
     align-items:center;
     border-bottom: 2px solid lightgrey;
+    color: #c651cd;
     >.channel-name > h4{
         margin-bottom:-2px;
+        color: #c651cd;
+    }
+    >.channel-name>small{
+        color: #8739f9;
     }
     >.chatHeader-right{
         width:60px;
@@ -149,6 +176,7 @@ const StyledChatHeader = styled.div`
 `;
 const StyledChatMessages = styled.div`
     height: calc(100vh - 200px);
+    background-color: #363636;
     width:100%;
     overflow-y:scroll;
     -ms-overflow-style: none;  
@@ -158,14 +186,13 @@ const StyledChatMessages = styled.div`
     }
 `;
 const StyledChatInput = styled.input`
-    width:90%;
+    width:95%;
     height:50px;
     font-size:1rem;
     padding:0 20px;
     outline:none;
-    border-radius:10px;
     background-color:#fff;
-    border: 1px solid #000;
+    border:none;
 `;
 const ChatBottom = styled.div`
     padding-bottom: 200px;
@@ -174,8 +201,10 @@ const StyledNothing = styled.div`
     display:grid;
     place-items:center;
     flex: 1;
+    background-color:#363636;
     >p{
-        font-size: 24px;
+        font-size: 26px;
+        color: #c651cd;
     }
 `;
 

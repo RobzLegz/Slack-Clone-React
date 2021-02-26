@@ -12,7 +12,7 @@ const Message = ({message,timestamp,user,userImage}) => {
                 <p>{message}</p>
                 <StyledTimestampContainer>
                     <p>{timeago.format(new Date(timestamp?.toDate()).toLocaleString())}</p>
-                    <ExpandMoreIcon />
+                    <ExpandMoreIcon style={{color:"#000"}} />
                 </StyledTimestampContainer>
             </StyledMessageContainer>
         </StyledMessage>
@@ -23,9 +23,9 @@ const StyledMessage = styled.div`
     width:100%;
     padding:20px 10px;
     height:fit-content;
-    color:#000;
+    color:#fff;
     :hover{
-        background-color: #eeeaea;
+        background-color: #555;
     }
     border-bottom:1px solid lightgrey;
 `;
@@ -50,6 +50,9 @@ const StyledTimestampContainer = styled.div`
     align-items:center;
     border-radius: 30px;
     font-size: 14px;
+    >p{
+        color:#000;
+    }
 `;
 const StyledUserImage = styled.img`
     height:50px;

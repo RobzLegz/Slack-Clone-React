@@ -20,10 +20,10 @@ function App() {
       if(authUser) {
         dispatch(
           login({
-            uid: authUser.uid,
-            photo: authUser.photoURL,
-            email: authUser.email,
-            displayName: authUser.displayName,
+            uid: authUser?.uid,
+            photo: authUser?.photoURL,
+            email: authUser?.email,
+            displayName: authUser?.displayName,
           })
         );
       }else{

@@ -27,6 +27,7 @@ const Sidebar = () => {
                 name: channelName,
             });
         }
+        return;
     };
 
     useEffect(() => {
@@ -76,8 +77,8 @@ const Sidebar = () => {
             </StyledAddChannel>
             <hr/>
             <StyledAddChannel style={{marginTop: "20px"}}>
-                <img src={user.photo} alt={user?.displayName}/>
-                <p>{user.displayName}</p>
+                <img src={user?  user?.photo : "https://i.stack.imgur.com/34AD2.jpg"} alt={user?.displayName}/>
+                <p>{user ? user?.displayName : "Robert"}</p>
             </StyledAddChannel>
         </SidebarContainer>
     )

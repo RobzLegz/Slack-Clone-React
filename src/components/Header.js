@@ -22,7 +22,7 @@ const Header = () => {
             </StyledHeaderMiddle>
             <StyledHeaderRight>                
                 <HelpOutlineIcon />
-                <StyledAvatar onClick={() => auth.signOut()} src={user.photo} />
+                <StyledAvatar onClick={() => auth.signOut()} src={user ? user?.photo : "https://i.stack.imgur.com/34AD2.jpg"} />
             </StyledHeaderRight>
         </StyledHeader>
     )
@@ -81,7 +81,7 @@ const StyledAvatar = styled.img`
     cursor: pointer;
     display:flex;
     margin-right:20px;
-    height: 45px;
+    height: 40px;
     border-radius: 3px;
     :hover{
         opacity:0.8;
