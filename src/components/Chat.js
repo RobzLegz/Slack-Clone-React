@@ -114,10 +114,10 @@ const Chat = () => {
     )
 }
 const StyledChat = styled.div`
+    margin-top:60px;
     position: relative;
     flex:1;
     height: calc(100vh - 60px);
-    margin-top: 60px;
     background-color:#fff;
     background-color: #363636;
     display:flex;
@@ -132,6 +132,7 @@ const StyledChat = styled.div`
         width: 80%;
         bottom: 20px;
         background-color:#fff;
+        z-index:100;
     }
     .send-button{
         background-color:green;
@@ -153,11 +154,13 @@ const StyledChat = styled.div`
 const StyledChatHeader = styled.div`
     display:flex;
     justify-content:space-between;
-    height:60px;
+    margin-top:0px;
+    height:70px;
     width:100%;
     align-items:center;
     border-bottom: 2px solid lightgrey;
     color: #c651cd;
+    background:transparent;
     >.channel-name > h4{
         margin-bottom:-2px;
         color: #c651cd;
@@ -175,7 +178,6 @@ const StyledChatHeader = styled.div`
     }
 `;
 const StyledChatMessages = styled.div`
-    height: calc(100% - 120px);
     background-color: #363636;
     width:100%;
     overflow-y:scroll;
@@ -193,6 +195,7 @@ const StyledChatInput = styled.input`
     outline:none;
     background-color:#fff;
     border:none;
+    z-index: 100;
 `;
 const ChatBottom = styled.div`
     padding-bottom: 200px;
